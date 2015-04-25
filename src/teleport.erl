@@ -40,6 +40,15 @@ gs_call(Process, Message, Timeout) ->
       end
   end.
 
+gf_send_event(Process, Event) ->
+  Node = get_node(Process),
+  case node_addressable(Node) of
+    false ->
+      {error, nodedown};
+    _ ->
+      Name = name_for_node(Node),
+      do_send(Process, Name, has_worker(Name), {'$gen_event', Event})
+  end.
 
 name_for_node(Node) ->
   list_to_atom(lists:flatten(io_lib:format("~s_~s", [teleport, Node]))).
