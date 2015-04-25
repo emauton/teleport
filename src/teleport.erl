@@ -1,6 +1,6 @@
 -module(teleport).
 
--export([send/2, gs_call/3, start/0, term_to_iolist/1]).
+-export([send/2, gs_call/3, gf_send_event/2, start/0, term_to_iolist/1]).
 
 -export([name_for_node/1]).
 
